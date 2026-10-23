@@ -1,0 +1,139 @@
+/* Prototype page styles on top of tokens.css + components.css (Creative design system v1). */
+@font-face{font-family:"Space Grotesk";src:url(fonts/SpaceGrotesk-wght.woff2) format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"Inter";src:url(fonts/Inter-wght.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Alfa Slab One";src:url(fonts/AlfaSlabOne-Regular.ttf) format("truetype");font-weight:400;font-display:swap}
+a{color:var(--tt-link)}
+.tt-body{padding-bottom:64px}@media(min-width:1024px){.tt-body{padding-bottom:0}}
+.pt-main{padding-top:var(--tt-s-5);padding-bottom:var(--tt-s-8)}
+.pt-sec{margin-top:var(--tt-s-8)}
+.pt-row{display:flex;flex-wrap:wrap;gap:var(--tt-s-3);align-items:center}
+.pt-demo{font-size:12px;color:var(--tt-text-muted);text-align:center;padding:6px;background:#0B0C0E}
+/* v4.5: lava frame v2, coal strip (v4/v4.2) removed: Creative frame v3.1 (frame/) replaces them. Archived: _prev_20261017_v45/archived_coal_lava.css */
+/* home hero (lg+ only; F6) */
+.pt-hero{display:none}
+@media(min-width:1024px){.pt-hero{display:block;position:relative;aspect-ratio:16/7;max-height:560px;width:100%;background:#000 url(img/hero_present.webp) 70% 40%/cover no-repeat}
+.pt-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#16181Cee 0,#16181Cb3 34%,#16181C00 60%)}
+.pt-hero__in{position:relative;max-width:var(--tt-max);margin:0 auto;padding:var(--tt-s-12) var(--tt-gutter);height:100%;display:flex;flex-direction:column;justify-content:center}
+.pt-hero__txt{max-width:44%}}
+/* today card */
+.pt-today{display:grid;gap:0}
+@media(min-width:768px){.pt-today{grid-template-columns:1fr 1fr}}
+.pt-today .tt-tile__img{aspect-ratio:16/9}.pt-today .tt-tile__img img{width:44%}
+@media(min-width:768px){.pt-today .tt-tile__img{aspect-ratio:4/3}.pt-today .tt-tile__img img{width:62%}}
+.pt-price-line{font:600 var(--tt-fs-lg) var(--tt-font-display);margin:10px 0 14px}
+.pt-price-line b{color:var(--tt-straw)}
+.pt-teaser{position:relative;overflow:hidden}
+.pt-teaser img{filter:blur(14px) brightness(.6);width:60%}
+.pt-teaser .pt-lock{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font:700 var(--tt-fs-lg) var(--tt-font-display)}
+/* tee page */
+.pt-tee{display:grid;gap:var(--tt-s-6)}
+@media(min-width:900px){.pt-tee{grid-template-columns:1.1fr 1fr;align-items:start}}
+.pt-thumbs{display:flex;gap:8px;margin-top:8px}.pt-thumbs button{width:64px;height:64px;padding:0;border:2px solid var(--tt-line);border-radius:var(--tt-r-md);background:#1B1D22;cursor:pointer}
+.pt-thumbs button[aria-pressed=true]{border-color:var(--tt-straw)}.pt-thumbs img{width:100%}
+.pt-swatch{width:44px;height:44px;border-radius:50%;border:2px solid var(--tt-line-2);cursor:pointer}
+.pt-swatch[aria-pressed=true]{border-color:var(--tt-straw);box-shadow:0 0 0 2px var(--tt-black),0 0 0 4px var(--tt-straw)}
+.pt-sizes{display:flex;flex-wrap:wrap;gap:8px}
+.pt-sizes button{min-width:52px;min-height:var(--tt-tap);border-radius:var(--tt-r-md);border:2px solid var(--tt-line-2);background:#121418;color:var(--tt-text);font:600 15px var(--tt-font-display);cursor:pointer}
+.pt-sizes button[aria-pressed=true]{border-color:var(--tt-straw);color:var(--tt-straw)}
+.pt-artistbox{display:flex;gap:var(--tt-s-4);align-items:center}
+.pt-artistbox img{width:64px;height:64px;border-radius:50%;flex:none}
+.pt-trust{font-size:14px;color:var(--tt-text-muted);border-left:3px solid var(--tt-straw);padding-left:10px}
+.pt-record{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:14px}
+.pt-record dt{color:var(--tt-text-muted)}.pt-record dd{margin:0}
+/* chips / filters */
+.pt-chip{min-height:var(--tt-tap);padding:0 16px;border-radius:var(--tt-r-pill);border:2px solid var(--tt-line-2);background:transparent;color:var(--tt-text);font:600 14px var(--tt-font-display);cursor:pointer}
+.pt-chip[aria-pressed=true]{border-color:var(--tt-straw);color:var(--tt-straw);background:#D9B45A14}
+.tt-tile a{color:inherit;text-decoration:none}.tt-tile a.tt-tile__artist{color:var(--tt-link)}
+/* submit */
+.pt-steps{display:grid;gap:var(--tt-s-4);grid-template-columns:1fr 1fr}
+@media(min-width:768px){.pt-steps{grid-template-columns:repeat(4,1fr)}}
+.pt-steps svg{width:32px;height:32px;stroke:var(--tt-straw);fill:none;stroke-width:2}
+.pt-form{display:grid;gap:var(--tt-s-4)}
+@media(min-width:768px){.pt-form .pt-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--tt-s-4)}}
+.pt-check{display:flex;gap:10px;align-items:flex-start;font-size:15px}.pt-check input{width:22px;height:22px;margin-top:2px;flex:none;accent-color:var(--tt-straw)}
+.pt-drop{border:2px dashed var(--tt-straw);border-radius:var(--tt-r-lg);padding:var(--tt-s-6);text-align:center;background:#D9B45A0d}
+.pt-err{background:var(--tt-crust);border:1px solid #7a2e12;border-radius:var(--tt-r-md);padding:12px 14px;color:var(--tt-err)}
+.pt-ok{border:1px solid #2f5a39;border-radius:var(--tt-r-md);padding:12px 14px;color:var(--tt-ok);background:#11201a}
+.pt-table{width:100%;border-collapse:collapse;font-size:15px}.pt-table th,.pt-table td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--tt-line)}
+.pt-table th{font-family:var(--tt-font-display);color:var(--tt-straw)}
+details{border-bottom:1px solid var(--tt-line);padding:12px 0}summary{cursor:pointer;font:600 16px var(--tt-font-display);min-height:32px}
+/* artist */
+.pt-cover{height:140px;background:linear-gradient(120deg,#2A1A10,#3A2214 40%,#1E2633);border-radius:var(--tt-r-lg)}
+.pt-prof{display:flex;gap:var(--tt-s-4);align-items:flex-end;margin-top:-48px;padding:0 var(--tt-s-4);flex-wrap:wrap}
+.pt-prof .pt-av{width:96px;height:96px;border-radius:50%;border:4px solid var(--tt-black)}
+.pt-log li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--tt-line)}
+.pt-log{list-style:none;padding:0;margin:0}
+.pt-legal h2{margin-top:var(--tt-s-8)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+.pt-sticky{position:fixed;left:0;right:0;bottom:56px;padding:8px var(--tt-gutter);background:#0F1114ee;border-top:1px solid #2C3036;z-index:60}@media(min-width:1024px){.pt-sticky{display:none}}
+.pt-hasticky{padding-bottom:130px}
+@media(max-width:767px){.pt-pdpimg{aspect-ratio:16/10}.pt-pdpimg img{width:54%}.pt-thumbs button{width:48px;height:48px}}
+[hidden]{display:none!important}
+/* F9: on desktop the photo hero is the buy block, so the today card is hidden (shown below 1024) */
+@media(min-width:1024px){.pt-today{display:none}}
+.pt-hero .tt-hero-badge-wrap{margin:0 0 var(--tt-s-4)}
+.pt-today .tt-hero-head .tt-hero-badge-wrap{width:96px;--tt-badge-w:96px}
+.tt-feature{margin-top:var(--tt-s-2)}
+.pt-teaser .tt-tile__img{aspect-ratio:auto!important;height:200px;overflow:hidden}.pt-teaser .tt-tile__img img{width:auto;height:190px}@media(min-width:768px){.pt-teaser .tt-tile__img{height:280px}.pt-teaser .tt-tile__img img{height:260px}}
+/* photo mockups (assets_v1 2026-10-16n): full-bleed photo squares, not floating cutouts */
+.tt-tile__img{overflow:hidden}
+.tt-tile__img img{width:100%;height:100%;object-fit:cover}
+.pt-pdpimg img,.pt-tee .pt-pdpimg img{width:100%!important;height:100%;object-fit:cover;object-position:50% 40%}
+.pt-thumbs button{overflow:hidden}.pt-thumbs img{width:100%;height:100%;object-fit:cover}
+.pt-teaser .tt-tile__img img,.pt-teaser img{width:100%!important;height:100%!important;object-fit:cover}
+/* (comment removed v1.7.2, LOW 10) */
+.pt-today .tt-tile__img img{width:44%;height:auto;object-fit:contain}
+@media(min-width:768px){.pt-today .tt-tile__img img{width:62%}}
+/* (comment removed v1.7.2, LOW 10) */
+@media(min-width:1024px){
+ .pt-hero{background:#000 url(img/intro_fire_1920.webp) 62% 55%/cover no-repeat;overflow:hidden}
+ .pt-hero__shot{position:absolute;z-index:1;right:max(4%,calc(50% - 560px));top:50%;height:86%;width:auto;max-height:480px;transform:translateY(-50%);filter:drop-shadow(0 18px 30px #000c) drop-shadow(0 0 36px #E8642C55)}
+ .pt-hero__in{z-index:2}
+}
+.pt-hero__shot{display:none}@media(min-width:1024px){.pt-hero__shot{display:block}}
+.pt-today .tt-tile__img{background:#0B0C0E url(img/intro_fire_1920.webp) 72% 62%/cover no-repeat}
+.pt-today .tt-tile__img img{filter:drop-shadow(0 10px 18px #000c) drop-shadow(0 0 22px #E8642C55)}
+/* v4: today's tee shows the flat hanging cutout over the forge as its primary shot; on-body is the 2nd thumb */
+.pt-pdpimg.is-forge,.pt-thumbs button.is-forge{background:#0B0C0E url(img/intro_fire_1920.webp) 72% 62%/cover no-repeat}
+.pt-pdpimg.is-forge{position:relative}
+.pt-pdpimg.is-forge img{position:absolute;left:0;right:0;top:7%;margin:0 auto;width:auto!important;height:86%!important;max-width:90%;object-fit:contain;filter:drop-shadow(0 14px 24px #000c) drop-shadow(0 0 30px #E8642C55)}
+.pt-thumbs button.is-forge img{object-fit:contain}
+/* v4: hero grows with its content (price framing + gone line) instead of clipping the CTA */
+@media(min-width:1024px){.pt-hero{aspect-ratio:auto;max-height:none;min-height:520px}.pt-hero__in{padding-top:32px;padding-bottom:40px}}
+/* v4 numbering: Coming to the forge strip (unnumbered, no dates, no prices) + Gallery empty state */
+.pt-coming{margin-top:var(--tt-s-2)}
+.pt-coming__strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,44%);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;overscroll-behavior-x:contain}
+@media(min-width:768px){.pt-coming__strip{grid-auto-columns:minmax(170px,23%)}}
+@media(min-width:1100px){.pt-coming__strip{grid-auto-flow:row;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible}}
+.pt-coming__tile{scroll-snap-align:start}
+.pt-coming__tile .tt-tile__img{aspect-ratio:1}
+.pt-coming__tile .tt-tile__body{padding:10px 12px 12px}
+.pt-coming__tile .tt-tile__title{font-size:15px;line-height:1.25}
+.pt-coming__tile .tt-tile__artist{font-size:13px}
+.pt-gempty{text-align:center;margin:20px 0;padding:40px 20px;border-style:dashed}
+.pt-gempty__txt{margin:0;font:700 var(--tt-fs-lg,20px)/1.4 var(--tt-font-display);color:var(--tt-straw,#E9B949)}
+
+/* v4.2 Submit category: ONE required pick (radio chips, nothing preselected), stored as category_artist */
+.pt-chips{border:0;margin:0;padding:0;min-width:0}.pt-chips legend{padding:0;margin-bottom:4px}
+.pt-chips__row{display:flex;flex-wrap:wrap;gap:8px}
+.pt-chip{position:relative;display:inline-flex}
+.pt-chip input{position:absolute;opacity:0;width:1px;height:1px}
+.pt-chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:var(--tt-r-pill);border:1px solid var(--tt-line-2);color:var(--tt-text);font:600 var(--tt-fs-sm)/1 var(--tt-font-body);cursor:pointer;user-select:none}
+.pt-chip input:checked+span{background:var(--tt-heat);border-color:var(--tt-heat);color:var(--tt-black)}
+.pt-chip input:checked+span::before{content:'✓';margin-right:6px}
+.pt-chips.is-err .pt-chip span{border-color:var(--tt-err)}
+.pt-chip input:focus-visible+span{box-shadow:var(--tt-focus)}
+
+/* v4.3.1 ambient sound toggle: in the header next to Cart, Cart-pill style, 44 px tap target (fixed bottom-left placement removed) */
+.tt-nav__snd{display:inline-grid;place-items:center;flex:0 0 auto;width:var(--tt-tap);height:var(--tt-tap);min-height:var(--tt-tap);padding:0;border:0;border-radius:var(--tt-r-pill);
+ background:var(--tt-black-2);color:var(--tt-text);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tt-nav__snd:hover{color:var(--tt-straw)}.tt-nav__snd[aria-pressed=true]{color:var(--tt-straw);box-shadow:inset 0 0 0 1px var(--tt-bronze)}
+.tt-nav__snd:focus-visible{outline:2px solid var(--tt-focus);outline-offset:2px}
+/* mobile header fit (logo + Cart + speaker + menu): no horizontal overflow from 320 px up. The wordmark scales down and drops
+   to icon-only at <=350 px; the Cart, speaker and menu never shrink below 44 px. */
+@media (max-width:1023px){.tt-nav{gap:6px;padding-left:12px;padding-right:12px}.tt-nav__cart,.tt-nav__snd,.tt-nav__menu{flex:0 0 auto}.tt-nav__menu{width:var(--tt-tap);min-width:var(--tt-tap)}
+ .tt-nav__logo{min-width:0;gap:8px;font-size:clamp(11px,3.25vw,16px)}.tt-nav__logo img{width:34px;height:34px;flex:0 0 auto}.tt-nav__cart{padding:0 10px}}
+@media (max-width:350px){.tt-nav__logo{font-size:0;gap:0}}
+/* v4.5: the 5-column tiers table overflowed 320 px screens by 54 px (Submit); tighter cells on very narrow phones */
+@media (max-width:359px){.pt-table{font-size:13px}.pt-table th,.pt-table td{padding:8px 4px}}

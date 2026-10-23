@@ -1,0 +1,40 @@
+/* Tempered Tees design tokens v1 (2026-10-16). Mobile-first. Source of truth: Design_System.md */
+:root{
+  /* color: base */
+  --tt-black:#16181C; --tt-black-2:#22252B; --tt-black-3:#0F1114; --tt-line:#2F343B; --tt-line-2:#7A838C;  /* 3.99:1 on Card, 4.61 on Black */
+  --tt-steel:#8A939B; --tt-steel-lt:#AEB5BC; --tt-text:#E9ECEF; --tt-text-muted:#AEB5BC; --tt-link:#9FB5D8;
+  /* color: temper (brand) */
+  --tt-straw:#D9B45A; --tt-bronze:#B87333; --tt-purple:#7A4A78; --tt-blue:#3E5C8A;
+  --tt-heat:#E8642C;            /* buy actions only */
+  --tt-heat-press:#D85C26;  /* black text 4.64:1 */
+  --tt-core:#FFE7A0; --tt-hot:#FFB43C; --tt-crust:#3A1606;
+  /* color: status (always paired with text/icon) */
+  --tt-ok:#8FD19E; --tt-warn:#FFB08A; --tt-err:#FF8A7A;
+  --tt-temper:linear-gradient(90deg,#D9B45A,#B87333,#7A4A78,#3E5C8A);
+  --tt-temper-steps:linear-gradient(90deg,#D9B45A 0 25%,#B87333 25% 50%,#7A4A78 50% 75%,#3E5C8A 75%);
+  /* type */
+  --tt-font-display:"Space Grotesk",system-ui,sans-serif;
+  --tt-font-body:"Inter",system-ui,sans-serif;
+  --tt-font-logo:"Alfa Slab One",Georgia,serif;  /* logo/wordmark only */
+  --tt-fs-xs:12px; --tt-fs-sm:14px; --tt-fs-md:16px; --tt-fs-lg:18px; --tt-fs-xl:22px;
+  --tt-fs-2xl:28px; --tt-fs-3xl:36px; --tt-fs-4xl:48px; --tt-fs-5xl:64px;
+  --tt-lh-tight:1.05; --tt-lh-snug:1.25; --tt-lh-body:1.5;
+  /* space (4 px base) */
+  --tt-s-1:4px; --tt-s-2:8px; --tt-s-3:12px; --tt-s-4:16px; --tt-s-5:20px; --tt-s-6:24px; --tt-s-8:32px; --tt-s-10:40px; --tt-s-12:48px; --tt-s-16:64px;
+  --tt-gutter:16px; --tt-max:1200px;
+  /* radii */
+  --tt-r-sm:4px; --tt-r-md:8px; --tt-r-lg:14px; --tt-r-xl:20px; --tt-r-pill:999px;
+  /* shadow / glow */
+  --tt-shadow-1:0 2px 6px #0008; --tt-shadow-2:0 10px 30px #000a;
+  --tt-glow-ember:0 0 0 1px #F2C24A66 inset,0 0 24px #E8642C99;
+  --tt-glow-soft:0 0 40px #E8642C55;
+  --tt-focus:0 0 0 2px var(--tt-black),0 0 0 5px var(--tt-straw);
+  /* motion */
+  --tt-dur-fast:120ms; --tt-dur:200ms; --tt-dur-slow:700ms; --tt-ease:cubic-bezier(.2,.7,.2,1);
+  --tt-tap:44px;               /* minimum touch target */
+  /* z */
+  --tt-z-frame:40; --tt-z-nav:70; --tt-z-sheet:90;
+}
+@media (min-width:768px){:root{--tt-gutter:32px}}
+@media (min-width:1280px){:root{--tt-gutter:64px}}
+@media (prefers-reduced-motion:reduce){:root{--tt-dur-fast:0ms;--tt-dur:0ms;--tt-dur-slow:0ms}}

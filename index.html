@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Send a design for review · Tempered Tees</title>
+<meta name="description" content="Send Tempered Tees a design for review. You keep all rights to your design.">
+<meta name="theme-color" content="#0F1114">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>html,.tt-body{background:#0F1114}</style>
+
+<style>
+/* Page-only styles (TT-SUB). Mobile-first; nothing here overrides the shared design system. */
+/* no overflow-x:hidden: the 320px no-overflow check must be honest */
+.sub-head{display:flex;align-items:center;gap:10px;padding:12px var(--tt-gutter);background:var(--tt-black-3);position:relative;z-index:5}
+.tt-lock{display:flex;align-items:center;gap:12px;min-height:44px;text-decoration:none}.tt-lock img{width:36px;height:36px;display:block}.tt-lock span{font:700 14px 'Space Grotesk',system-ui,sans-serif;letter-spacing:.28em;color:#E9DCC0}
+.sub-main{max-width:760px;margin:0 auto}
+.sub-hero h1{font-family:var(--tt-font-display);font-size:clamp(30px,8vw,48px);line-height:1.05;margin:8px 0 12px;color:var(--tt-text)}
+.sub-hero p{font-size:17px;line-height:1.55;color:var(--tt-text)}
+.sub-perks{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.sub-perks li{padding:12px 14px;border-radius:var(--tt-r-md);background:var(--tt-black-2);line-height:1.5}
+.sub-perks li b{color:var(--tt-straw)}
+.sub-badge{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.sub-badge img{width:72px;height:72px}
+.sub-form{display:grid;gap:20px}
+.sub-field{display:grid;gap:6px;min-width:0}
+.sub-field .tt-input{width:100%;box-sizing:border-box}
+.sub-hint{font-size:14px;color:var(--tt-text-muted);margin:0}
+.sub-err{color:var(--tt-err);font-size:14px;margin:0;font-weight:600}
+.sub-err:empty{display:none}
+[aria-invalid="true"]{border-color:var(--tt-err)!important;box-shadow:0 0 0 1px var(--tt-err)}
+.sub-drop{display:block;border:2px dashed var(--tt-straw);border-radius:var(--tt-r-lg);padding:20px 14px;text-align:center;background:#D9B45A0d;cursor:pointer}
+.sub-drop.is-over{background:#D9B45A26}
+.sub-drop:focus-within,.sub-field:has(#f-files:focus) .sub-drop{box-shadow:var(--tt-focus)}
+.sub-drop b{color:var(--tt-text)}
+.sub-thumbs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.sub-thumbs li{border:1px solid var(--tt-line);border-radius:var(--tt-r-md);background:var(--tt-black-2);padding:6px;display:grid;gap:4px;min-width:0}
+.sub-thumbs img{width:100%;aspect-ratio:1;object-fit:contain;background:#0F1114;border-radius:4px}
+.sub-thumbs span{font-size:12px;color:var(--tt-text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub-thumbs input{width:100%;min-width:0;min-height:44px;font:inherit;font-size:16px;color:var(--tt-text);background:#0F1114;border:1px solid var(--tt-line-2);border-radius:var(--tt-r-sm);padding:6px 8px}
+.sub-thumbs label{font-size:12px;color:var(--tt-text-muted)}
+/* v1.6.3 (Arthur): 44x44 tap targets. Checkbox rows: the whole label is the target; 11px padding with a matching negative margin grows the hit area to 44px without moving anything. */
+.sub-field .pt-check{box-sizing:border-box;min-height:44px;padding:11px 0;margin:-11px 0}
+.sub-thumbs button{min-height:44px;font:inherit;font-size:13px;color:var(--tt-text);background:transparent;border:1px solid var(--tt-line-2);border-radius:var(--tt-r-sm);cursor:pointer}
+.sub-thumbs button:focus-visible,.sub-form button:focus-visible,.sub-form input:focus-visible,.sub-form a:focus-visible{outline:none;box-shadow:var(--tt-focus)}
+.sub-hp{position:absolute!important;left:-10000px!important;top:auto;width:1px;height:1px;overflow:hidden}
+.sub-submit{width:100%}.sub-state .tt-btn{border-radius:12px}.sub-prog{margin:-8px 0 0;font-size:15px;color:var(--tt-text);font-weight:600}.sub-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:20px 0 0}.sub-cta .tt-btn{min-height:48px;border-radius:12px;padding:12px 22px;text-decoration:none}.sub-cta span{font-size:15px}#trust{margin-top:14px}.tt-footer a{color:var(--tt-straw)}@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}.sub-form .tt-btn{border-radius:12px}.tt-btn--primary:hover{box-shadow:none}@media (hover:hover) and (pointer:fine){.sub-form .tt-btn--primary:not(:disabled):hover{background:#F0723A}}.sub-form .tt-btn--primary:not(:disabled):active{transform:scale(.97)}.sub-form .tt-btn--primary{transition:transform 160ms cubic-bezier(.23,1,.32,1),background-color 150ms ease}@media (prefers-reduced-motion:reduce){.sub-form .tt-btn--primary{transition:none}.sub-form .tt-btn--primary:active{transform:none}}.sub-sum{padding:10px 12px;border-radius:8px;background:#3A1606;color:#FFD2C8;font-weight:600;font-size:15px;margin:0}.sub-sum:empty{display:none}
+@media(min-width:600px){.sub-submit{width:auto}}
+.sub-dlg{width:min(720px,calc(100vw - 24px));max-height:calc(100dvh - 24px);box-sizing:border-box;padding:0;border:1px solid var(--tt-line-2);border-radius:var(--tt-r-lg);background:var(--tt-black-2);color:var(--tt-text)}
+.sub-dlg::backdrop{background:#000c}
+.sub-dlg__bar{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:var(--tt-black-3);border-bottom:1px solid var(--tt-line)}
+.sub-dlg__bar h2{margin:0;font-family:var(--tt-font-display);font-size:20px;line-height:1.2}
+.sub-dlg__body{padding:16px;line-height:1.55;font-size:15px;overflow-wrap:anywhere}
+.sub-dlg__body ul,.sub-dlg__body ol{padding-left:22px}
+.sub-dlg__body li{margin:4px 0}
+.sub-dlg__close{min-width:44px;min-height:44px;font:inherit;font-size:15px;color:var(--tt-text);background:transparent;border:1px solid var(--tt-line-2);border-radius:var(--tt-r-sm);cursor:pointer;padding:0 12px}
+.sub-dlg__close:focus-visible,.sub-dlg a:focus-visible{outline:none;box-shadow:var(--tt-focus)}
+.sub-sum ul{margin:6px 0 0;padding-left:20px}.sub-sum a{color:inherit;text-decoration:underline}.sub-sum:empty{display:none}.sub-draft{display:block;margin:0 0 12px;padding:8px 10px;border:1px solid var(--tt-straw);border-radius:var(--tt-r-md);color:var(--tt-core);background:#2a2412;font-weight:700;font-size:14px}
+.sub-dlg em{color:var(--tt-core)}
+.sub-tbd{color:var(--tt-core);font-weight:700}
+.sub-fine{font-size:14px;color:var(--tt-text-muted)}
+.sub-state{text-align:center}
+.sub-state h2:focus{outline:none}
+.sub-state .tt-btn{margin:6px}
+.sub-spin{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-2px;margin-right:6px;animation:subspin .8s linear infinite}
+@keyframes subspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.sub-spin{animation:none}}
+</style>
+<style>html{scrollbar-gutter:stable}</style>
+
+</head>
+<body class="tt-body tt-lava">
+<!-- TT-SUB v1.7.2-review (Arthur 19:28 CT; from v1.7.1): REVIEW-ONLY intake (Arthur 2026-10-22 19:05 CT). Not deployed. -->
+<header class="sub-head"><a class="tt-lock" href="https://temperedtees.com" aria-label="Tempered Tees home"><img src="assets/logo_icon.svg" alt=""><span>TEMPERED TEES</span></a></header>
+
+<main class="tt-wrap pt-main sub-main" id="main">
+<section class="sub-hero pt-sec" aria-labelledby="h-hero">
+  <h1 id="h-hero">Send us your design.</h1>
+  <p id="hero-line">Tempered Tees is a new shirt shop. Coming soon: one design out of the fire every day. If you make art you'd want on a shirt, send it in for review. A person looks at every submission.</p>
+  <p class="sub-cta"><a class="tt-btn tt-btn--primary" id="cta-top" href="#sub">Send a design</a><span class="tt-muted" id="limits-line"></span></p>
+</section>
+
+<section class="pt-sec" aria-labelledby="h-need">
+  <h2 class="tt-h2" id="h-need">What happens next</h2>
+  <p><span id="reply-line">We reply to every submission within 14 days, whether or not we select it.</span> Sending a design is only a request for review. Nothing is posted, printed or sold.</p>
+</section>
+
+<section class="pt-sec" aria-label="Submission form">
+<form id="sub" class="tt-card tt-card--pad sub-form" novalidate>
+  <div class="sub-field">
+    <label class="tt-label" for="f-name">Name <span aria-hidden="true">*</span></label>
+    <input class="tt-input" id="f-name" name="name" autocomplete="name" required maxlength="80" aria-describedby="f-name-err">
+    <p class="sub-err" id="f-name-err"></p>
+  </div>
+  <div class="sub-field">
+    <label class="tt-label" for="f-email">Email <span aria-hidden="true">*</span></label>
+    <input class="tt-input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" aria-describedby="f-email-err">
+    <p class="sub-err" id="f-email-err"></p>
+  </div>
+  <div class="sub-field">
+    <label class="tt-label" for="f-link">Portfolio link (optional)</label>
+    <input class="tt-input" id="f-link" name="portfolio" type="url" inputmode="url" autocomplete="url" placeholder="https://" maxlength="500" aria-describedby="f-link-err">
+    <p class="sub-err" id="f-link-err"></p>
+  </div>
+  <div class="sub-field">
+    <p class="tt-label" id="f-files-lbl">Design upload <span aria-hidden="true">*</span></p>
+    <label class="sub-drop" id="f-drop" for="f-files"><b>Drop images here or tap to choose</b><br><span class="sub-hint" id="f-files-hint"></span></label>
+    <input id="f-files" class="sr-only" type="file" name="files" multiple accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" aria-labelledby="f-files-lbl" aria-describedby="f-files-hint f-files-err">
+    <ul class="sub-files" id="f-list"></ul>
+    <p class="sub-err" id="f-files-err"></p>
+  </div>
+  <div class="sub-field">
+    <label class="pt-check"><input type="checkbox" id="f-age" name="age_18" required aria-describedby="f-age-err"> <span>I am 18 or older.</span></label>
+    <p class="sub-err" id="f-age-err"></p>
+  </div>
+  <div class="sub-field">
+    <label class="pt-check"><input type="checkbox" id="f-orig" name="original_no_ai" required aria-describedby="f-orig-err"> <span id="f-orig-lbl">This design is my original work, not made with AI image generators. Normal editing tools (like Photoshop, Procreate, or Illustrator) are fine.</span></label>
+    <p class="sub-err" id="f-orig-err"></p>
+  </div>
+  <div class="sub-field">
+    <p class="tt-label">Review Terms</p>
+    <p class="sub-hint" id="review-terms">You keep all rights to your design. Tempered Tees will only use it to review your work and decide whether to offer you an agreement. We will not post, print, sell, or share it without a separate signed agreement. You can withdraw it anytime by emailing artists@temperedtees.com, and we will delete it from all of our inboxes and storage, including trash, within 30 days.</p>
+    <label class="pt-check"><input type="checkbox" id="f-terms" name="review_terms" required aria-describedby="review-terms f-terms-err"> <span>I have read and accept the Review Terms above.</span></label>
+    <p class="sub-err" id="f-terms-err"></p>
+  </div>
+  <div class="sub-hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+  <p class="sub-err" id="f-form-err" role="alert"></p>
+  <div><button class="tt-btn tt-btn--primary tt-btn--lg sub-submit" id="f-submit" type="submit">Send for review</button></div>
+  <p class="sub-fine">Sending a design doesn't guarantee a reply with an offer. <a href="#privacy" data-dlg="privacy">Privacy Notice</a></p>
+  <p class="sr-only" id="f-status" role="status" aria-live="polite"></p>
+</form>
+
+<div id="ok" class="tt-card tt-card--pad sub-state" hidden>
+  <img src="assets/logo_icon.svg" alt="" width="64" height="64">
+  <h2 class="tt-h2" id="ok-h" tabindex="-1">Got it. Thanks.</h2>
+  <p>Your design was sent to our review inbox. We'll reply from artists@temperedtees.com. Keep your reference number.</p>
+  <p class="tt-muted" id="ok-ref" style="font-size:14px"></p>
+</div>
+<div id="testmode" class="tt-card tt-card--pad sub-state" role="alert" hidden>
+  <h2 class="tt-h2" id="testmode-h" tabindex="-1">Not sent (test mode)</h2>
+  <p id="testmode-msg">This page is in test mode, so your design was NOT sent to Tempered Tees and nobody will see it. Please don't rely on this submission. Questions? artists@temperedtees.com</p>
+  <p class="tt-muted" id="testmode-ref" style="font-size:14px"></p>
+  <button class="tt-btn tt-btn--secondary" id="testmode-back" type="button">Back to the form</button>
+</div>
+<div id="fail" class="tt-card tt-card--pad sub-state" hidden>
+  <h2 class="tt-h2" id="fail-h" tabindex="-1">That didn't send.</h2>
+  <p id="fail-msg">Your design wasn't sent. Nothing is lost on this page; try again.</p>
+  <button class="tt-btn tt-btn--primary" id="fail-retry" type="button">Back to the form</button>
+</div>
+</section>
+</main>
+
+<dialog class="sub-dlg" id="privacy" aria-labelledby="privacy-h">
+  <div class="sub-dlg__bar"><h2 id="privacy-h">Privacy Notice</h2><button type="button" class="sub-dlg__close" data-close>Close</button></div>
+  <div class="sub-dlg__body">
+    <p><strong>What we collect.</strong> Your name, email, portfolio link, the images you upload, your answers to the three checkboxes, and the date and time you sent them.</p>
+    <p><strong>Why.</strong> Only to review your design and to contact you about it.</p>
+    <p id="privacy-where"><strong>Where it goes.</strong> Submissions are sent to artists@temperedtees.com and forwarded to a private Gmail account (hosted by Google) run by the team that operates Tempered Tees. Only that team reads them. We use your name, email and files only to review your work and reply to you, and we never sell or share them.</p>
+    <p id="privacy-retention"><strong>How long.</strong> If we don't select your work, we delete it within 12 months. If you ask us to delete it sooner, we delete it from all of our inboxes and storage, including trash, within 30 days of your request.</p>
+    <p id="privacy-ai"><strong>No AI training.</strong> We never use your submissions to train AI.</p>
+    <p><strong>18+ only.</strong> This page is for people 18 and older. If we learn someone under 18 sent a design, we delete it.</p>
+    <p class="sub-hint" id="privacy-updated">Last updated October 22, 2026. Tempered Tees LLC, PO Box 114, Sugar Grove, IL 60554.</p>
+  </div>
+</dialog>
+
+<footer class="tt-footer"><div class="tt-wrap"><p style="margin:0" id="foot-c">© 2026 Tempered Tees LLC</p><p style="margin:6px 0 0" class="tt-muted"><a href="mailto:artists@temperedtees.com">artists@temperedtees.com</a> · <a href="#privacy" data-dlg="privacy">Privacy</a></p></div></footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/review.js"></script>
+</body>
+</html>
