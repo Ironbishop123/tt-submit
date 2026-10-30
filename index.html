@@ -68,13 +68,14 @@
 .sub-state .tt-btn{margin:6px}
 .sub-spin{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-2px;margin-right:6px;animation:subspin .8s linear infinite}
 @keyframes subspin{to{transform:rotate(360deg)}}
+#cta-top:focus-visible,#ok-again:focus-visible,#fail-retry:focus-visible{box-shadow:var(--tt-focus)} /* v1.7.7: keep the focus ring on these 3 primary buttons even while the mouse rests on them (the page-level .tt-btn--primary:hover rule would hide it) */
 @media (prefers-reduced-motion:reduce){.sub-spin{animation:none}}
 </style>
 <style>html{scrollbar-gutter:stable}</style>
 
 </head>
 <body class="tt-body tt-lava">
-<!-- TT-SUB v1.7.2-review (Arthur 19:28 CT; from v1.7.1): REVIEW-ONLY intake (Arthur 2026-10-22 19:05 CT). Not deployed. -->
+<!-- TT-SUB v1.7.7-sendanother (staging; from live v1.7.6 page): Send another design + spam-line. Original header follows. TT-SUB v1.7.2-review (Arthur 19:28 CT; from v1.7.1): REVIEW-ONLY intake (Arthur 2026-10-22 19:05 CT). Not deployed. -->
 <header class="sub-head"><a class="tt-lock" href="https://temperedtees.com" aria-label="Tempered Tees home"><img src="assets/logo_icon.svg" alt=""><span>TEMPERED TEES</span></a></header>
 
 <main class="tt-wrap pt-main sub-main" id="main">
@@ -139,6 +140,8 @@
   <h2 class="tt-h2" id="ok-h" tabindex="-1">Got it. Thanks.</h2>
   <p>Your design was sent to our review inbox. We'll reply from artists@temperedtees.com. Keep your reference number.</p>
   <p class="tt-muted" id="ok-ref" style="font-size:14px"></p>
+  <p id="ok-spam">Our confirmation email can land in spam or junk, so check there if you don't see it.</p>
+  <button class="tt-btn tt-btn--primary" id="ok-again" type="button">Send another design</button>
 </div>
 <div id="testmode" class="tt-card tt-card--pad sub-state" role="alert" hidden>
   <h2 class="tt-h2" id="testmode-h" tabindex="-1">Not sent (test mode)</h2>
@@ -171,5 +174,28 @@
 
 <script src="assets/config.js"></script>
 <script src="assets/review.js"></script>
+<script>
+/* TT-SUB v1.7.7-sendanother: after a send, "Send a design" (#cta-top) and the new "Send another design" button reset the form and bring it back.
+   Runs after review.js and does not touch it: submit/validation/payload code is unchanged. Normal #cta-top behaviour (form visible) is untouched. */
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('sub'), cta = $('cta-top'), again = $('ok-again'), failMsg = $('fail-msg'), failDefault = failMsg.textContent;
+  function cardShowing() { return !$('ok').hidden || !$('fail').hidden || !$('testmode').hidden; }
+  function resetForm() {
+    /* review.js keeps the chosen files in a private list; its own Remove buttons are the only way to empty it, so press them (the last click re-renders an empty list). */
+    var btn, guard = 10; while (guard-- > 0 && (btn = $('f-list').querySelector('button'))) btn.click();
+    form.reset(); $('f-files').value = '';
+    Array.prototype.forEach.call(form.querySelectorAll('.sub-err'), function (e) { e.textContent = ''; });
+    Array.prototype.forEach.call(form.querySelectorAll('[aria-invalid]'), function (e) { e.removeAttribute('aria-invalid'); });
+    $('f-drop').classList.remove('is-over'); $('f-status').textContent = '';
+    $('ok-ref').textContent = ''; $('testmode-ref').textContent = ''; failMsg.textContent = failDefault;
+    form.hidden = false; ['ok', 'fail', 'testmode'].forEach(function (id) { $(id).hidden = true; });
+    form.scrollIntoView({ block: 'start' }); $('f-name').focus({ preventScroll: true });
+  }
+  cta.addEventListener('click', function (e) { if (cardShowing()) { e.preventDefault(); resetForm(); } });
+  again.addEventListener('click', resetForm);
+})();
+</script>
 </body>
 </html>
