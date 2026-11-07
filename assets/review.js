@@ -1,4 +1,6 @@
-/* TT-SUB v1.7.1-review: REVIEW-ONLY intake client. No account, review only.
+/* TT-SUB v1.7.9-sec (2026-10-30): adds a short-lived page token. On load (and again after each send, and when it is 20 minutes old) the page asks the backend for a token (GET <exec>?action=token) and sends it, with location.origin, in every submission. If the token cannot be fetched the page still submits; the backend decides (log mode accepts, enforce mode refuses). The token is NOT a secret (anyone can read it from this page); see TT-SUB_Security.gs.
+   2026-11-07: a token read waits at most 12s. If that read misses, later sends are not stalled on another hung GET. One non-forced read is shared. After a send the cached token is stale, and a slower response cannot overwrite a newer token. No backend change is required.
+   TT-SUB v1.7.1-review: REVIEW-ONLY intake client. No account, review only.
    Limits are mirrored in ../../TT-SUB_Review_Intake.gs (a test checks they match). */
 (function () {
   'use strict';
@@ -47,6 +49,35 @@
     ok = err('f-terms-err', $('f-terms').checked ? '' : 'Accept the Review Terms to send your design.') && ok;
     return ok;
   }
+  // v1.7.9: page token (see header). Never blocks the form: any failure resolves to the last token we had, or ''.
+  // A miss (hang past 12s, non-JSON, or no token) is remembered so the next send is not stalled. The read that
+  // actually failed still resolves to the last token. A forced refresh drops freshness first and cannot be overwritten by a slower older response.
+  var TOKEN_WAIT_MS = 12000;
+  var tok = { v: '', t: 0, p: null, gen: 0, gaveUp: false };
+  function tokenEndpoint() { return URL_ + (URL_.indexOf('?') >= 0 ? '&' : '?') + 'action=token'; }
+  function freshToken() { return (tok.v && (Date.now() - tok.t) < 20 * 60 * 1000) ? tok.v : ''; }
+  function getToken(force) {
+    if (!URL_) return Promise.resolve('');
+    if (force) tok.t = 0;
+    if (!force && freshToken()) return Promise.resolve(tok.v);
+    if (!force && tok.gaveUp) return Promise.resolve('');
+    if (!force && tok.p) return tok.p;
+    var gen = ++tok.gen, timer = null, fetched;
+    try { fetched = fetch(tokenEndpoint(), { method: 'GET', redirect: 'follow' }); }
+    catch (e2) { fetched = Promise.reject(e2); }
+    fetched = Promise.resolve(fetched).then(function (r) { return r.json(); }).then(function (j) {
+      if (gen !== tok.gen) return freshToken() || tok.v || '';
+      if (j && j.ok === true && typeof j.token === 'string' && j.token) { tok.v = j.token; tok.t = Date.now(); tok.gaveUp = false; }
+      else tok.gaveUp = true;
+      return freshToken() || tok.v || '';
+    }).catch(function () { if (gen === tok.gen) tok.gaveUp = true; return tok.v || ''; });
+    var timed = new Promise(function (resolve) {
+      timer = setTimeout(function () { if (gen === tok.gen && !freshToken()) tok.gaveUp = true; resolve(freshToken() || ''); }, TOKEN_WAIT_MS);
+    });
+    var p = Promise.race([fetched, timed]).then(function (v) { clearTimeout(timer); if (tok.p === p) tok.p = null; return v; });
+    tok.p = p;
+    return p;
+  }
   function b64(f) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(String(r.result).split(',')[1]); }; r.onerror = rej; r.readAsDataURL(f); }); }
   function show(id) { ['sub', 'ok', 'fail', 'testmode'].forEach(function (x) { $(x).hidden = x !== id; }); var h = $(id + '-h'); if (h) h.focus(); }
   $('sub').addEventListener('submit', function (e) {
@@ -56,16 +87,17 @@
     if (Date.now() - t0 < L.minSubmitMs) return err('f-form-err', 'That was fast. Wait a moment and try again.');
     if (!URL_) return err('f-form-err', 'Submissions aren\u2019t open yet. Questions? artists@temperedtees.com');
     busy = true; $('f-submit').disabled = true; $('f-status').textContent = 'Sending\u2026';
-    Promise.all(files.map(function (f) { return b64(f).then(function (d) { return { name: f.name, type: f.type, size: f.size, b64: d }; }); })).then(function (fl) {
-      var body = { kind: 'tt-review-intake/1', name: $('f-name').value.trim(), email: $('f-email').value.trim(), portfolio: $('f-link').value.trim(),
-        age_18: $('f-age').checked, original_no_ai: $('f-orig').checked, review_terms: $('f-terms').checked, review_terms_text: $('review-terms').textContent, website: $('f-website').value, files: fl };
+    Promise.all([Promise.all(files.map(function (f) { return b64(f).then(function (d) { return { name: f.name, type: f.type, size: f.size, b64: d }; }); })), getToken(false)]).then(function (pair) {
+      var fl = pair[0], body = { kind: 'tt-review-intake/1', name: $('f-name').value.trim(), email: $('f-email').value.trim(), portfolio: $('f-link').value.trim(),
+        age_18: $('f-age').checked, original_no_ai: $('f-orig').checked, review_terms: $('f-terms').checked, review_terms_text: $('review-terms').textContent, website: $('f-website').value, files: fl, token: pair[1], page: location.origin };
       return fetch(URL_, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), redirect: 'follow' }).then(function (r) { return r.json(); });
     }).then(function (j) {
-      busy = false; $('f-submit').disabled = false;
+      busy = false; $('f-submit').disabled = false; try { getToken(true); } catch (e1) {}   // v1.7.9: fresh token for the next try / "send another"
       if (j && j.ok === true && j.mail === 'sent') { $('ok-ref').textContent = 'Reference: ' + j.ref; show('ok'); }   // v1.7.1 (Gatekeeper HIGH 2): success ONLY when the server says the mail was sent
       else if (j && (j.mail === 'dry_run' || j.code === 'TEST_MODE_NOT_SENT')) { $('testmode-ref').textContent = j.ref ? 'Test reference (not sent): ' + j.ref : ''; show('testmode'); } else { $('fail-msg').textContent = (j && j.error) || 'Your design wasn\u2019t sent. Try again.'; show('fail'); }
-    }).catch(function () { busy = false; $('f-submit').disabled = false; show('fail'); });
+    }).catch(function () { busy = false; $('f-submit').disabled = false; try { getToken(true); } catch (e1) {} show('fail'); });
   });
   $('fail-retry').addEventListener('click', function () { show('sub'); });
   $('testmode-back').addEventListener('click', function () { show('sub'); });
+  try { getToken(true); } catch (e0) { /* a token-read failure must not leave the form without its submit handler */ }
 })();
