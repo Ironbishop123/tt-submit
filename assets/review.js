@@ -43,6 +43,7 @@
     ok = err('f-link-err', !v('f-link') ? '' : (/^https?:\/\/[^\s/$.?#][^\s]*\.[^\s]{2,}/i.test(v('f-link')) ? '' : 'Enter a full link starting with https://')) && ok;
     if (files.length < L.minFiles) ok = err('f-files-err', 'Add at least one image of your design.') && ok;
     ok = err('f-age-err', $('f-age').checked ? '' : 'Confirm you are 18 or older.') && ok;
+    ok = err('f-resident-err', $('f-resident').checked ? '' : 'Confirm you are a US resident.') && ok;
     ok = err('f-orig-err', $('f-orig').checked ? '' : 'Confirm this is your original work with no AI-generated parts.') && ok;
     ok = err('f-terms-err', $('f-terms').checked ? '' : 'Accept the Review Terms to send your design.') && ok;
     return ok;
@@ -58,7 +59,7 @@
     busy = true; $('f-submit').disabled = true; $('f-status').textContent = 'Sending\u2026';
     Promise.all(files.map(function (f) { return b64(f).then(function (d) { return { name: f.name, type: f.type, size: f.size, b64: d }; }); })).then(function (fl) {
       var body = { kind: 'tt-review-intake/1', name: $('f-name').value.trim(), email: $('f-email').value.trim(), portfolio: $('f-link').value.trim(),
-        age_18: $('f-age').checked, original_no_ai: $('f-orig').checked, review_terms: $('f-terms').checked, review_terms_text: $('review-terms').textContent, website: $('f-website').value, files: fl };
+        age_18: $('f-age').checked, us_resident: $('f-resident').checked, original_no_ai: $('f-orig').checked, review_terms: $('f-terms').checked, review_terms_text: $('review-terms').textContent, website: $('f-website').value, files: fl };
       return fetch(URL_, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), redirect: 'follow' }).then(function (r) { return r.json(); });
     }).then(function (j) {
       busy = false; $('f-submit').disabled = false;
