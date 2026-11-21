@@ -6,12 +6,16 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Send a design for review · Tempered Tees</title>
 <meta name="description" content="Send Tempered Tees a design for review. You keep all rights to your design.">
-<meta name="theme-color" content="#0F1114">
-<link rel="icon" href="assets/favicon.ico">
+<meta name="theme-color" content="#0d0c0b">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/tt-daybook-cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/tt-daybook-hanken-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/components.css">
 <link rel="stylesheet" href="assets/site.css">
-<style>html,.tt-body{background:#0F1114}</style>
+<style>html,.tt-body{background:#0d0c0b}</style>
 
 <style>
 /* Page-only styles (TT-SUB). Mobile-first; nothing here overrides the shared design system. */
@@ -72,11 +76,14 @@
 @media (prefers-reduced-motion:reduce){.sub-spin{animation:none}}
 </style>
 <style>html{scrollbar-gutter:stable}</style>
+<!-- Daybook look (Claude, 2026-11-19). Look only: ids, fields, limits, config.js and review.js are unchanged. Must stay the LAST stylesheet. -->
+<link rel="stylesheet" href="assets/tt-daybook-skin.css">
 
 </head>
 <body class="tt-body tt-lava">
+<div class="tt-room" aria-hidden="true"><i class="tt-glow"></i><i class="tt-glow"></i><i class="tt-smoke"></i></div>
 <!-- TT-SUB v1.7.7-sendanother (staging; from live v1.7.6 page): Send another design + spam-line. Original header follows. TT-SUB v1.7.2-review (Arthur 19:28 CT; from v1.7.1): REVIEW-ONLY intake (Arthur 2026-10-22 19:05 CT). Not deployed. -->
-<header class="sub-head"><a class="tt-lock" href="https://temperedtees.com" aria-label="Tempered Tees home"><img src="assets/logo_icon.svg" alt=""><span>TEMPERED TEES</span></a></header>
+<header class="sub-head"><a class="tt-lock" href="https://temperedtees.com" aria-label="Tempered Tees home"><img src="assets/tt-daybook-mark.jpg" alt="" width="160" height="160"><span>TEMPERED TEES</span></a></header>
 
 <main class="tt-wrap pt-main sub-main" id="main">
 <section class="sub-hero pt-sec" aria-labelledby="h-hero">
@@ -140,7 +147,7 @@
 </form>
 
 <div id="ok" class="tt-card tt-card--pad sub-state" hidden>
-  <img src="assets/logo_icon.svg" alt="" width="64" height="64">
+  <img src="assets/tt-daybook-mark.jpg" alt="" width="64" height="64">
   <h2 class="tt-h2" id="ok-h" tabindex="-1">Got it. Thanks.</h2>
   <p>Your design was sent to our review inbox. We'll reply from artists@temperedtees.com. Keep your reference number.</p>
   <p class="tt-muted" id="ok-ref" style="font-size:14px"></p>
