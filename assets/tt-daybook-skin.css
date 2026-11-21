@@ -1,0 +1,140 @@
+/* Tempered Tees submit page: the Daybook look (Claude, 2026-11-19).
+   Loads LAST, after tokens.css, components.css, site.css and the page's own <style> blocks.
+   Look only. It changes no id, no field, no script and no limit. Remove this one <link> and the page is the old look again.
+   Colours and type are the Daybook's (tt-daybook.css 1.0.6.2): dark gallery stage, gold, Cormorant + Hanken Grotesk. */
+
+@font-face { font-family: "TTD Serif"; font-weight: 500; font-style: normal; font-display: swap; src: url("tt-daybook-cormorant-500.woff2") format("woff2"); }
+@font-face { font-family: "TTD Sans"; font-weight: 400; font-style: normal; font-display: swap; src: url("tt-daybook-hanken-400.woff2") format("woff2"); }
+@font-face { font-family: "TTD Sans"; font-weight: 600; font-style: normal; font-display: swap; src: url("tt-daybook-hanken-600.woff2") format("woff2"); }
+
+:root {
+  /* the Daybook's own names */
+  --bg: #0d0c0b; --panel: #161412; --line: #2c2925; --line2: #4a4338; --ink: #efe9df; --soft: #d8cfbf; --muted: #a79f92; --gold: #c9a35a; --gold2: #e2c486;
+  --field: #756b5a; /* field edges: 3:1 or better on the panel, so a box is easy to find */
+  --serif: "TTD Serif", "Cormorant Garamond", Georgia, serif; --sans: "TTD Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --head-h: 56px;
+  /* the old submit-page names, pointed at the Daybook's values */
+  --tt-black: var(--bg); --tt-black-2: var(--panel); --tt-black-3: var(--bg); --tt-line: var(--line); --tt-line-2: var(--field);
+  --tt-text: var(--ink); --tt-text-muted: var(--muted); --tt-link: var(--gold2);
+  --tt-straw: var(--gold); --tt-core: var(--gold2); --tt-heat: #c9a35a; --tt-heat-press: #b58c43;
+  --tt-font-display: var(--serif); --tt-font-body: var(--sans);
+  --tt-r-sm: 2px; --tt-r-md: 2px; --tt-r-lg: 2px; --tt-r-xl: 2px; --tt-r-pill: 2px;
+  --tt-focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold2);
+  --tt-gutter: 20px;
+}
+
+html, .tt-body { background: var(--bg); }
+html { scroll-padding-top: calc(var(--head-h) + 16px); } /* the fixed header never covers a field or a heading the page jumps to */
+.tt-body { position: relative; padding-bottom: 0; color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.tt-body a { color: var(--gold2); text-decoration-color: rgba(201, 163, 90, 0.5); text-underline-offset: 0.18em; }
+.tt-body ::selection { background: rgba(201, 163, 90, 0.35); }
+
+/* the room's light and the slow smoke, the same as the Daybook. One fixed layer behind the page. */
+.tt-room { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.tt-room i { position: absolute; display: block; pointer-events: none; will-change: transform; }
+.tt-room .tt-glow { inset: -20%; background: radial-gradient(110% 50% at 50% 26%, rgba(201, 163, 90, 0.10), transparent 62%); animation: ttd-drift 72s ease-in-out infinite alternate; }
+.tt-room .tt-glow + .tt-glow { background: radial-gradient(90% 45% at 85% 80%, rgba(201, 163, 90, 0.05), transparent 64%); animation-duration: 86s; animation-direction: alternate-reverse; }
+.tt-room .tt-smoke { inset: -30%;
+  background: radial-gradient(34% 28% at 32% 42%, rgba(0, 0, 0, 0.42), transparent 72%), radial-gradient(30% 24% at 68% 62%, rgba(0, 0, 0, 0.32), transparent 72%), radial-gradient(26% 20% at 55% 30%, rgba(255, 238, 214, 0.035), transparent 70%);
+  animation: ttd-smoke 96s ease-in-out infinite alternate; }
+@keyframes ttd-drift { 0% { transform: translate3d(-4%, -3%, 0) scale(1.02); } 50% { transform: translate3d(3%, 2%, 0) scale(1.08); } 100% { transform: translate3d(-2%, 4%, 0) scale(1.04); } }
+@keyframes ttd-smoke { 0% { transform: translate3d(7%, -5%, 0) rotate(0deg); } 50% { transform: translate3d(-3%, 3%, 0) rotate(5deg); } 100% { transform: translate3d(-7%, 6%, 0) rotate(9deg); } }
+@media (prefers-reduced-motion: reduce) { .tt-room i { animation: none; } }
+
+/* header: the Daybook lockup. Gold TT mark, then the name. */
+.sub-head { position: sticky; top: 0; z-index: 50; height: var(--head-h); display: flex; align-items: center; gap: 8px; padding: 0 12px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.tt-lock { display: flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; }
+.tt-lock img { width: 34px; height: 34px; display: block; flex: none; object-fit: contain; mix-blend-mode: screen; filter: contrast(1.3) brightness(0.9); } /* the filter sinks the photo's dark ground into the page, so no square shows */
+.tt-lock span { font: 500 15px/1 var(--serif); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold2); white-space: nowrap; }
+.tt-body a.tt-lock:focus-visible { outline: 2px solid var(--gold2); outline-offset: 2px; box-shadow: none; }
+
+/* the page: one centred column, like the Daybook's policy pages */
+.sub-main, .tt-footer { position: relative; z-index: 1; }
+.sub-main { max-width: 720px; margin: 0 auto; padding: 8px 20px 72px; }
+.sub-main .pt-sec { margin-top: 40px; }
+.sub-hero { text-align: center; padding-bottom: 28px; border-bottom: 1px solid var(--gold); }
+.sub-hero h1 { margin: 6px 0 16px; font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 9vw, 60px); line-height: 1.06; letter-spacing: 0; color: var(--ink); }
+.sub-hero p { max-width: 34em; margin-left: auto; margin-right: auto; font-size: 16px; line-height: 1.7; color: var(--soft); }
+.sub-cta { flex-direction: column; justify-content: center; gap: 12px; margin-top: 24px; }
+.sub-cta span { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+.sub-main .tt-h2 { font-family: var(--serif); font-weight: 500; font-size: 30px; line-height: 1.15; color: var(--ink); }
+.sub-main section[aria-labelledby="h-need"] { text-align: center; }
+.sub-main section[aria-labelledby="h-need"] p { max-width: 34em; margin: 10px auto 0; color: var(--soft); }
+.tt-body .tt-muted { color: var(--muted); }
+
+/* buttons: the Daybook's gold bar, and its quiet outline */
+.tt-body .tt-btn { min-height: 48px; padding: 0 22px; border: 0; border-radius: 2px; font: 600 13px/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; box-shadow: none; transition: filter 150ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+.tt-body .tt-btn--lg { min-height: 54px; font-size: 13px; }
+.tt-body .tt-btn--primary, .tt-body .sub-form .tt-btn--primary:not(:disabled) { background: linear-gradient(180deg, #dcb96f, #b58c43); color: #14110c; }
+.tt-body a.tt-btn--primary { color: #14110c; }
+.tt-body .tt-btn--primary:hover, .tt-body .sub-form .tt-btn--primary:not(:disabled):hover { background: linear-gradient(180deg, #dcb96f, #b58c43); box-shadow: none; filter: brightness(1.08); }
+.tt-body .tt-btn--primary:not(:disabled):active { transform: scale(0.98); filter: brightness(0.96); }
+.tt-body .tt-btn:disabled { background: #3a352d; color: var(--muted); cursor: default; filter: none; transform: none; }
+.tt-body .tt-btn--secondary { min-height: 44px; padding: 0 12px; border: 1px solid var(--line2); background: transparent; color: var(--ink); font-size: 12px; letter-spacing: 0.02em; text-transform: none; }
+.tt-body .tt-btn--secondary:hover { border-color: var(--gold); }
+.tt-body .tt-btn:focus-visible, #cta-top:focus-visible, #ok-again:focus-visible, #fail-retry:focus-visible { outline: 2px solid var(--gold2); outline-offset: 2px; box-shadow: none; }
+/* the shimmer: the same slow sweep of light as the Daybook's Acquire button. Not on a disabled button. Still for reduced motion. */
+.tt-body .tt-btn--primary { position: relative; overflow: hidden; }
+.tt-body .tt-btn--primary:not(:disabled)::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent); animation: ttd-sheen 3.6s ease-in-out infinite; pointer-events: none; }
+@keyframes ttd-sheen { 0% { transform: translateX(-120%); } 55%, 100% { transform: translateX(320%); } }
+@media (prefers-reduced-motion: reduce) { .tt-body .tt-btn--primary::after { animation: none; display: none; } }
+.sub-submit { width: 100%; }
+.sub-state .tt-btn, .sub-form .tt-btn, .sub-cta .tt-btn { border-radius: 2px; }
+.sub-cta .tt-btn { min-width: 220px; padding: 0 22px; }
+
+/* the form: one panel, hairline edge, square corners */
+.tt-body .tt-card { background: var(--panel); border: 1px solid var(--line); border-radius: 2px; overflow: visible; }
+.tt-body .tt-card--pad { padding: 24px 20px; }
+.sub-form { gap: 22px; }
+.tt-body .tt-label { margin-bottom: 6px; font: 600 11px/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.tt-body .tt-input { min-height: 48px; padding: 12px 14px; border: 1px solid var(--field); border-radius: 2px; background: var(--bg); color: var(--ink); font: 400 16px/1.4 var(--sans); }
+.tt-body .tt-input::placeholder { color: var(--muted); opacity: 1; }
+.tt-body .tt-input:focus-visible { border-color: var(--gold2); outline: 2px solid var(--gold2); outline-offset: 2px; box-shadow: none; }
+.tt-body .sub-hint, .tt-body .sub-fine { color: var(--muted); font-size: 14px; line-height: 1.6; }
+.tt-body .sub-err { color: #ff8a7a; }
+.tt-body [aria-invalid="true"] { border-color: #ff8a7a !important; box-shadow: 0 0 0 1px #ff8a7a; }
+.tt-body .sub-drop { padding: 26px 16px; border: 1px dashed var(--gold); border-radius: 2px; background: rgba(201, 163, 90, 0.05); transition: background-color 150ms ease; }
+.tt-body .sub-drop:hover, .tt-body .sub-drop.is-over { background: rgba(201, 163, 90, 0.12); }
+.tt-body .sub-drop b { font-weight: 600; color: var(--ink); }
+.tt-body .sub-drop:focus-within, .tt-body .sub-field:has(#f-files:focus-visible) .sub-drop { outline: 2px solid var(--gold2); outline-offset: 2px; box-shadow: none; }
+.tt-body .sub-files { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.tt-body .sub-file { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 6px 6px 12px; border: 1px solid var(--line); background: var(--bg); font-size: 14px; color: var(--soft); overflow-wrap: anywhere; }
+.tt-body .sub-file .tt-btn { flex: none; }
+.tt-body .pt-check { font-size: 15px; line-height: 1.55; color: var(--soft); }
+.tt-body .pt-check input { accent-color: var(--gold); }
+.tt-body .pt-check input:focus-visible { outline: 2px solid var(--gold2); outline-offset: 2px; box-shadow: none; }
+.tt-body .sub-sum { border-radius: 2px; }
+
+/* the three end states */
+.sub-state { padding: 36px 20px; }
+.sub-state > img { display: block; width: 64px; height: 64px; margin: 0 auto 8px; object-fit: contain; mix-blend-mode: screen; filter: contrast(1.3) brightness(0.9); }
+.sub-state p { max-width: 32em; margin-left: auto; margin-right: auto; color: var(--soft); }
+.sub-state .tt-btn { margin: 12px 6px 0; }
+
+/* the privacy notice */
+.tt-body .sub-dlg { border: 1px solid var(--line2); border-top: 1px solid var(--gold); border-radius: 2px; background: var(--panel); color: var(--soft); }
+.tt-body .sub-dlg::backdrop { background: rgba(0, 0, 0, 0.8); }
+.tt-body .sub-dlg__bar { background: var(--panel); border-bottom: 1px solid var(--line); }
+.tt-body .sub-dlg__bar h2 { font-family: var(--serif); font-weight: 500; font-size: 26px; color: var(--ink); }
+.tt-body .sub-dlg__body strong { color: var(--ink); font-weight: 600; }
+.tt-body .sub-dlg__close { border: 1px solid var(--line2); border-radius: 2px; color: var(--ink); font: 600 12px/1 var(--sans); }
+.tt-body .sub-dlg__close:hover { border-color: var(--gold); }
+.tt-body .sub-dlg__close:focus-visible, .tt-body .sub-dlg a:focus-visible, .tt-body .sub-form a:focus-visible, .tt-footer a:focus-visible { outline: 2px solid var(--gold2); outline-offset: 2px; box-shadow: none; }
+
+/* footer: centred, like the Daybook's */
+.tt-body .tt-footer { max-width: 720px; margin: 0 auto; padding: 28px 20px calc(40px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 13px; text-align: center; }
+.tt-body .tt-footer .tt-wrap { padding: 0; }
+.tt-body .tt-footer a { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold); text-decoration: none; }
+
+@media (min-width: 600px) {
+  .tt-body .tt-card--pad { padding: 36px 40px; }
+  .sub-main .pt-sec { margin-top: 56px; }
+}
+@media (min-width: 900px) {
+  :root { --head-h: 72px; }
+  .sub-head { padding: 0 40px; }
+  .tt-lock img { width: 44px; height: 44px; }
+  .tt-lock span { font-size: 19px; letter-spacing: 0.22em; }
+  .sub-main { padding-top: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .tt-body .tt-btn { transition: none; } .tt-body .tt-btn--primary:active { transform: none; } }
